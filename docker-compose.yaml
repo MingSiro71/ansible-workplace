@@ -1,0 +1,17 @@
+services:
+  ansible:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: ansible
+    environment:
+      - USER_UID=${USER_UID}
+      - USER_GID=${USER_GID}
+    volumes:
+      - ./workspace:/home/ansible/workspace
+      - ~/.ssh:/home/ansible/.ssh
+      - ~/.aws:/home/ansible/.aws
+    working_dir: /home/ansible/workspace
+    user: ansible
+    tty: true
+    entrypoint: ["/bin/bash"]
